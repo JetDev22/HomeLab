@@ -42,7 +42,7 @@ To allow for a nice HomeLab package and future expandability, I designed and 3D 
 <details>
 <summary>Dashy</summary>
 <img src="pictures/dashy.png" width="50%" align="center">
-<p>With glances installed, I use dashy to display all my servers in one convenient place (currently two). And since there was some space left, why not use it to track the latest crypto developments. I deployed dashy as docker container on my raspberry pi 5 using the following command.<ul><li>docker run -d -p 8080:80 -v ~/dashyconfig/my-conf.yml:/app/public/conf.yml --name HomeLab --restart=always lissy93/dashy:latest</li></ul>You can find my dashy config <a href="https://github.com/JetDev22/homelab/dashy_conf.yml">here</a></p>
+<p>With glances installed, I use dashy to display all my servers in one convenient place (currently two). And since there was some space left, why not use it to track the latest crypto developments. I deployed dashy as docker container on my raspberry pi 5 using the following command.<ul><li>docker run -d -p 8080:80 -v ~/dashyconfig/my-conf.yml:/app/public/conf.yml --name HomeLab --restart=always lissy93/dashy:latest</li></ul>You can find my dashy config in this repositories files</p>
 </details>
 
 ## Power Consumption
