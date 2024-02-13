@@ -1,0 +1,130 @@
+appConfig:
+  theme: minimal-dark
+  backgroundImg: https://i.pinimg.com/originals/2c/84/5a/2c845a66b8ad2a8aafd288bdc16cd459.jpg
+  language: en
+  startingView: default
+  defaultOpeningMethod: newtab
+  statusCheck: false
+  statusCheckInterval: 0
+  faviconApi: allesedv
+  layout: sidebar
+  iconSize: small
+  routingMode: history
+  enableMultiTasking: false
+  widgetsAlwaysUseProxy: false
+  webSearch:
+    disableWebSearch: true
+    searchEngine: duckduckgo
+    openingMethod: newtab
+    searchBangs: {}
+  enableFontAwesome: true
+  enableMaterialDesignIcons: false
+  hideComponents:
+    hideHeading: true
+    hideNav: true
+    hideSearch: true
+    hideSettings: false
+    hideFooter: true
+  auth:
+    enableGuestAccess: false
+    users: []
+    enableKeycloak: false
+  showSplashScreen: false
+  preventWriteToDisk: false
+  preventLocalSave: false
+  disableConfiguration: false
+  disableConfigurationForNonAdmin: false
+  allowConfigEdit: true
+  enableServiceWorker: false
+  disableContextMenu: false
+  disableUpdateChecks: false
+  disableSmartSort: false
+  enableErrorReporting: false
+pageInfo:
+  title: HomeLab
+  description: HomeLab Systems Overview
+  navLinks: []
+  footerText: ''
+sections:
+  - name: x86 MoneroMiner
+    widgets:
+      - type: gl-current-cpu
+        options:
+          hostname: http://192.168.178.130:61208
+        id: 0_1393_glcurrentcpu
+      - type: gl-current-cores
+        options:
+          hostname: http://192.168.178.130:61208
+        id: 1_1393_glcurrentcores
+      - type: gl-cpu-temp
+        options:
+          hostname: http://192.168.178.130:61208
+        id: 2_1393_glcputemp
+      - type: gl-current-mem
+        options:
+          hostname: http://192.168.178.130:61208
+        id: 3_1393_glcurrentmem
+      - type: gl-disk-space
+        options:
+          hostname: http://192.168.178.130:61208
+        id: 4_1393_gldiskspace
+    filteredItems: []
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+  - name: Raspberry Pi 5
+    widgets:
+      - type: gl-current-cpu
+        options:
+          hostname: http://192.168.178.136:61208
+        id: 0_1256_glcurrentcpu
+      - type: gl-current-cores
+        options:
+          hostname: http://192.168.178.136:61208
+        id: 1_1256_glcurrentcores
+      - type: gl-cpu-temp
+        options:
+          hostname: http://192.168.178.136:61208
+        id: 2_1256_glcputemp
+      - type: gl-current-mem
+        options:
+          hostname: http://192.168.178.136:61208
+        id: 3_1256_glcurrentmem
+      - type: gl-disk-space
+        options:
+          hostname: http://192.168.178.136:61208
+        id: 4_1256_gldiskspace
+    filteredItems: []
+  - name: Crypto
+    widgets:
+      - type: crypto-watch-list
+        options:
+          currency: EUR
+          assets:
+            - bitcoin
+            - ethereum
+            - polkadot
+            - monero
+        id: 0_641_cryptowatchlist
+      - type: crypto-price-chart
+        options:
+          asset: bitcoin
+          currency: EUR
+          numDays: 30
+        id: 1_641_cryptopricechart
+      - type: crypto-price-chart
+        options:
+          asset: ethereum
+          currency: EUR
+          numDays: 30
+        id: 2_641_cryptopricechart
+      - type: crypto-price-chart
+        options:
+          asset: polkadot
+          currency: EUR
+          numDays: 30
+        id: 3_641_cryptopricechart
+    filteredItems: []
