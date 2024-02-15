@@ -1,23 +1,21 @@
 # HomeLab
 
 ## Overview
-I always liked the idea to have some kind of server to play around with. Initially I bought a used HP Z600 Workstation with a single X5650 Xeon Processor. It ran Unraid and had two 250GB SSDs in it. I ran RepetierServer on it to control my Ender 3 V2 with Sprite Extruder and played around with other Linux Distros.
-The Downside was the average power consumption of around 85W all the way up to 130W. That doesn't sound much, but with energy prices in Germany, it adds up.
+I started off with an old HP Z600 Workstation that had plenty of power, but even with just one X5650 installed power and noise was too much. So I changed to an old i7 4770 System that had a better power draw and noise level, but was still not the right setup for me, drawing 82W in idle.
 
-So something had to change. I still had a mini PC laying around with a broken CPU cooler. So I decided to get rid of the plastic case, use thermalglue to attach a CPU cooler to it (since there was no standard mounting holes for regular CPU coolers) and solder the cooler fan to the 12V input of the mini pc. That gave me a descent X86 platform for my HomeLab idea with a power consumption of around 14W.
+Since I wanted to checkout the Raspberry Pi 5 anyways, had a spare Pi zero laying around, and gutted an old mini PC, I thought why not combine them all into my very own HomeLab Solution.
 
-The second player for my HomeLab has to be a Raspberry Pi of course. So I decided on a Raspberry Pi 5.
+I designed my own rack system to allow for future expandability and brought my power draw under load to around 29W. The mini PC and my Raspberry Pi 5 are joined in a docker swarm, with the Pi beeing the master. The mini PC serves its last days as a monero miner. That is by no means efficient or lucrative, but hey we might as well just have him do something with a purpose. Last but not least I setup my Pico Pis that I had from other projects to mine som Duino Coin, help the network and have a fun introduction into clustering.
 
-To allow for a nice HomeLab package and future expandability, I designed and 3D printed a tower housing both "workstations" and the switch. This approach allows for future growth by just adding another layer to the stack.
-
-<img src="pictures/homelab0.jpg" width="20%" align="center">
+<img src="pictures/homeLab.jpg" width="20%" align="center">
+<img src="pictures/homeLab2.jpg" width="20%" align="center">
 
 ## Hardware
 
 ##### Mini PC
 - Intel J4125 CPU 4 Cores / 4 Threads, 2,0GHz Base / 2,7GHz Boost
-- 8GB DDR4 RAM
-- 256GB M.2 SSD
+- 8 GB DDR4 RAM
+- 256 GB M.2 SSD
 - Ubuntu Server 23.10
 - Geekbench Score: Single Core: 358 / Multi Core : 1021
 
@@ -28,27 +26,58 @@ To allow for a nice HomeLab package and future expandability, I designed and 3D 
 - Raspberry Pi OS Lite 64bit (based on Debian Bookworm)
 - Geekbench Score: Single Core: 603 / Multi Core : 1608
 
+##### Raspberry Pi Zero W
+- 1GHz BCM 2835 SOC
+- 512 MB Ram
+- 16 GB Micro SD Card
+- Raspberry Pi OS Lite 32bit
+- Geekbench Score: Single Core: 323
+
+##### T-Display ESP32 1.14
+- 240 MHz Xtensa Single- / Dual-Core-32-Bit-LX6
+- 4 MB Flash
+- Nerdminer V2
+
+##### Raspberry Pi Pico
+- 133 MHz Dual-Core Arm Cortex-M0+ Prozessor
+- 264 KB Ram
+- 2 MB Flash
+
 ## Docker Container
 <details>
-<summary>xmrig MoneroMiner Dockerfile</summary>
+<summary>xmrig MoneroMiner Dockerfile [Mini PC, Raspberry Pi 5, Raspberry Pi Zero]</summary>
 <img src="pictures/miner.png" width="50%" align="center">
-<p>I wrote this Dockerfile and build the image on the raspberry pi and the x86 (due to architecture difference). This gave me the image needed to run a preconfigured xmrig instance, mining XMR for the moneroocean pool. Here you can find my <a href="https://github.com/JetDev22/homelab/xmrigContainer/Dockerfile">Dockerfile</a></p>
+<p>I wrote this Dockerfile and build the image on the raspberry pi and the x86 (due to architecture difference). This gave me the image needed to run a preconfigured xmrig instance, mining XMR for the moneroocean pool. Here you can find my <a href="https://github.com/JetDev22/homelab/xmrigContainer/Dockerfile">Dockerfile</a>. For my mini PC running the Intel J4125 I had to add --threads=4 to force all 4 cores to be used. The pi image works right out of the box on all cores</p>
 </details>
 <details>
-<summary>Glances</summary>
+<summary>Glances [Mini PC, Raspberry Pi 5, Raspberry Pi Zero]<</summary>
 <img src="pictures/glances.png" width="50%" align="center">
 <p>I run Glances to monitor each worker (Raspberry Pi and X86 mini PC). Here you can find <a href="https://github.com/joweisberg/docker-glances">Glances on Github</a></p>
 </details>
 <details>
-<summary>Dashy</summary>
+<summary>Dashy [Raspberry Pi 5]<</summary>
 <img src="pictures/dashy.png" width="50%" align="center">
 <p>With glances installed, I use dashy to display all my servers in one convenient place (currently two). And since there was some space left, why not use it to track the latest crypto developments. I deployed dashy as docker container on my raspberry pi 5 using the following command.<ul><li>docker run -d -p 8080:80 -v ~/dashyconfig/my-conf.yml:/app/public/conf.yml --name HomeLab --restart=always lissy93/dashy:latest</li></ul>You can find my dashy config in this repositories files</p>
 </details>
+<details>
+<summary>Duino Coin Miner [Raspberry Pi Zero]</summary>
+<img src="pictures/duinoMiner.png" width="30%" align="center">
+<img src="pictures/picoCluster2.jpg" width="20%" align="center"><br>
+<p>The Pi Zero manages my 8 Pico Pi cluster, mining Duco (Duino Coin) and mines Duco itself at the same time. You can find the Duino Project <a href="https://duinocoin.com/">here</a></p>
+</details>
 
 ## Power Consumption
-Idle:  
-Load: 23W resulting in around 0.562 kWh / day
+Idle: [to be determined, they are just to busy working]<br>
+Load: 29W resulting in around 0.696 kWh / day
 
 ## Plans
+- Delpoy various projects to docker containers
+- Host my website (A300 Reference)
+- Deploy Octoprint as control server for my old Ender 3 V2 (still struggling with USB passthrough)
+- Get one or two more Pi 5s and replace the mini PC as worker
 
 ## STLs
+All my *.stl files can be found over at printables.com by Prusa.<ul>
+<li>The Mini Rack: <a href="https://www.printables.com/model/763694-modular-and-stackable-homelab-mini-rack">Here</a></li>
+<li>The Pico Pi Mount: <a href="https://www.printables.com/model/765855-usb-cable-mount-for-pico-cluster">Here</a></li>
+</ul>
