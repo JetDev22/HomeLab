@@ -60,10 +60,15 @@ I designed my own rack system to allow for future expandability and brought my p
 <p>With glances installed, I use dashy to display all my servers in one convenient place (currently two). And since there was some space left, why not use it to track the latest crypto developments. I deployed dashy as docker container on my raspberry pi 5 using the following command.<ul><li>docker run -d -p 8080:80 -v ~/dashyconfig/my-conf.yml:/app/public/conf.yml --name HomeLab --restart=always lissy93/dashy:latest</li></ul>You can find my dashy config in this repositories files</p>
 </details>
 <details>
+<summary>Octoprint Docker [Raspberry Pi 5]</summary>
+<img src="pictures/octoprint.png" width="30%" align="center">
+<p>The Pi Zero manages my 8 Pico Pi cluster, mining Duco (Duino Coin) and mines Duco itself at the same time. You can find the Duino Project <a href="https://duinocoin.com/">here</a></p>
+</details>
+<details>
 <summary>Duino Coin Miner [Raspberry Pi Zero]</summary>
 <img src="pictures/duinoMiner.png" width="30%" align="center">
 <img src="pictures/picoCluster2.jpg" width="20%" align="center"><br>
-<p>The Pi Zero manages my 8 Pico Pi cluster, mining Duco (Duino Coin) and mines Duco itself at the same time. You can find the Duino Project <a href="https://duinocoin.com/">here</a></p>
+<p>This Octoprint Container manages my Ender 3V2 with SpriteExtruder. This way I can send my files from my laptop running OrcaSlicer straight to my Ender via wifi. You can find out more about Octoprint <a href="https://octoprint.org/">here</a></p>
 </details>
 
 ## Power Consumption
@@ -73,7 +78,6 @@ Load: 29W resulting in around 0.696 kWh / day
 ## Plans
 - Delpoy various projects to docker containers
 - Host my website (A300 Reference)
-- Deploy Octoprint as control server for my old Ender 3 V2 (still struggling with USB passthrough)
 - Get one or two more Pi 5s and replace the mini PC as worker
 
 ## STLs
